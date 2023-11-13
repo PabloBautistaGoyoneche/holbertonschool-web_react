@@ -1,61 +1,43 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const path = require('path');
 
 module.exports = {
-  mode: 'development',
-  entry: {
-    header: './modules/header/header.js',
-    body: './modules/body/body.js',
-    footer: './modules/footer/footer.js',
-  },
-  output: {
-    path: path.resolve(__dirname, './public'),
-    filename: '[name].bundle.js'
-    
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
+    mode: 'development',
+    entry: {
+        all: ["./modules/header/header.js", "./modules/body/body.js", "./modules/footer/footer.js"],
     },
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Webpack Output',
-    }),
-    new CleanWebpackPlugin(),
-  ],
-  devServer: {
-    static: {
-      directory: path.join(__dirname, "./public"),
-      serveIndex: true,
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'public'),
     },
-    open: true,
-    compress: true,
-    port: 8564,
-  },
-  devtool: 'inline-source-map',
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                use: [
+                    'file-loader',
+                    {
+                        loader: 'image-webpack-loader',
+                    }
+                ]
+            },
+        ],
+    },
+    devServer: {
+        static: path.join(__dirname, './public'),
+        port: 8564,
       },
-      {
-        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-        type: 'asset/resource',
-      },
-    ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Holberton Dashboard',
-  }),
-    new CleanWebpackPlugin()
-  ],
-  performance: {
-    hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
-  },
+      devtool: 'inline-source-map',
+      plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            chunks: ['header', 'body', 'footer'],
+        }),
+        new CleanWebpackPlugin(),
+      ],
 };
