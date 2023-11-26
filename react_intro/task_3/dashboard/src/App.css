@@ -1,0 +1,69 @@
+:root {
+  --holberton-red: #e1484c;
+  --fuente-principal: 'Arial', sans-serif;
+}
+
+body {
+  max-width: 90%;
+  margin: 0 auto;
+  font-family: var(--fuente-principal);
+  font-size: 1.2rem;
+}
+
+.App {
+  position: relative;
+  min-height: 100vh;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  border-bottom: 3px solid var(--holberton-red);
+}
+
+.App-header h1 {
+  margin: auto auto auto 0;
+  color: var(--holberton-red);
+}
+
+.App-header img {
+  width: 15rem;
+}
+.App-body {
+  margin: 2rem 3rem 2rem 3rem;
+
+}
+
+.App-body p {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.App-body label {
+  padding-right: 0.5rem;
+}
+
+.App-body input {
+  margin-right: 0.5rem;
+  padding: 0.2rem;
+}
+
+.App-body button {
+  padding: 0.2rem;
+
+}
+
+.App-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-style: italic;
+}
+
+
+.App-footer p {
+  text-align: center;
+  border-top: 3px solid var(--holberton-red);
+  padding: 16px 0;
+}
